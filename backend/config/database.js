@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 
+
 const connectDatabase = () => {
-mongoose.connect(process.env.DB_LOCAL_URL,{
-  useNewUrlParser : true,
-  useUnifiedTopology : true,
-  useCreateIndex : true
-}).then(con => {
-  console.log("Mongo db connected" + con.connection.host);
-})
+mongoose.connect(process.env.DB_LOCAL_URL ,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 }
-
-
 
 module.exports = connectDatabase;

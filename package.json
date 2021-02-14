@@ -5,12 +5,13 @@
   "main": "server.js",
   "scripts": {
     "start": "node ../ShopIt/backend/server",
-    "dev": "SET NODE_ENV=DEVELOPMENT& node ../ShopIt/backend/server",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon ../ShopIt/backend/server",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon ../ShopIt/backend/server"
   },
   "author": "Neeraj Saini",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.15",

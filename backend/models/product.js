@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
+
   name: {
     type: String,
     required: [true, 'Please enter the product Name'],
     trim: true,
-    maxLength: [5, 'Product name cannot exceed 100 characters ']
+    maxLength: [100, 'Product name cannot exceed 100 characters ']
   },
   price: {
     type: Number,

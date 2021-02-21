@@ -1,24 +1,51 @@
 const ErrorHandler = require('../utils/errorHandler');
 module.exports = (err,req,res,next) =>
 {
-  console.log(err.message)
   err.statusCode = err .statusCode || 500;
 if(process.env.NODE_ENV === "DEVELOPMENT"){
+
+
+
+
   res.status(err.statusCode).json({
     success : false,
-    error : err,
-    errorMessage : err.message,
-    stack : err.stack
+    Message : err.message,
+    stack : err.stack,
+  err
   })
 }
 
 if(process.env.NODE_ENV === "PRODUCTION")
 {
-  //let error = {...err}
-//  error.message = err.message
+
+
+  let error = {...err}
+
+  error.message = err.message;
+
+//Wrong Mongoose Object ID CastError
+  if(err.name === 'CastError'){
+    const message = 'Resouce not Found. Invalid :' + err.path;
+    error = new ErrorHandler(message, 400)
+  }
+
+
+
+  if(err.name === 'ValidationError'){
+    const message = Object.values(err.errors).map(value => value.message);
+    error = new ErrorHandler(message, 400)
+  }
+
+
+
+
+//Handling mongoose Validation error
+
+
   res.status(err.statusCode).json({
     success : false,
-    errorMessage : err.message || "Internal Server Error",
+    Message : error.message || "Internal Server Error",
+
   })
 }
 }

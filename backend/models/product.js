@@ -14,7 +14,6 @@ const productSchema = new mongoose.Schema({
     //maxLength : [5 , 'Product name cannot exceed 5 characters ']
     min: 0.0,
     max: [99999, 'Price Cannot exceed 99999'],
-    default: 0.0
   },
   description: {
     type: String,

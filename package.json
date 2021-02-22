@@ -8,7 +8,6 @@
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon ../ShopIt/backend/server",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon ../ShopIt/backend/server",
     "seed": "node ../ShopIt/backend/utils/seeder"
-
   },
   "author": "Neeraj Saini",
   "license": "ISC",

@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === "DEVELOPMENT"){
     success : false,
     Message : err.message,
     stack : err.stack,
-  err
+  
   })
 }
 

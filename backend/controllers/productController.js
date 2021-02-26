@@ -16,7 +16,6 @@ const apiFeatures = new APIFeatures(Product.find(), req.query).search().filter()
 
   //const products = await apiFeatures
   const products = await apiFeatures.query
-
   res.status(200).json({
     success: true,
     count: products.length,
@@ -27,7 +26,7 @@ const apiFeatures = new APIFeatures(Product.find(), req.query).search().filter()
 
 
 exports.newProduct = catchAsyncErros(async (req, res, next) => {
-
+  req.body.user = req.user.id;
   const product = await Product.create(req.body);
   res.status(201).json({
     success: true,
@@ -42,7 +41,6 @@ exports.getSingleProduct = catchAsyncErros(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not found", 404))
   }
-
   res.status(200).json({
     success: true,
     product

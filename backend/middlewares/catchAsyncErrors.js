@@ -3,6 +3,5 @@ module.exports = function(func){
   {
     Promise.resolve(func(req,res,next))
     .catch(next)
-
   }
 }

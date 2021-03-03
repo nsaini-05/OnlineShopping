@@ -11,7 +11,15 @@
       "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
     }],
     "stock" : 50,
-    "seller": "Amazon"
+    "seller": "Amazon",
+    "reviews" : [{
+      
+      "user" : "603db434cc8fc956f0002b14",
+      "name" : "admin",
+      "rating" : 5,
+      "comment" : "Yes this is really good"        
+    }      
+    ]
   },
   {
 
@@ -26,5 +34,6 @@
       "url": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
     }],
     "seller": "Amazon"
+    
   }
 ]

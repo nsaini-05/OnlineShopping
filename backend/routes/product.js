@@ -5,7 +5,7 @@ const router = express.Router();
 //Route Defination
 const {getProducts , newProduct , getSingleProduct, updateProduct, deleteProduct,  createProductReview,getReviews,deleteReview} = require('../controllers/productController')
 const {isAuthenticatedUser ,authorizeRoles} = require('../middlewares/auth.js')
-router.route('/products').get(isAuthenticatedUser, getProducts);
+router.route('/products').get( getProducts);
 router.route('/product/:id').get(getSingleProduct);
 
 

@@ -12,6 +12,7 @@ function App() {
     <Header />
     <div className = "container container-fluid">
     <Route path = "/" component = {Home} exact />
+    <Route path = "/search/:keyword" component = {Home} exact />
     <Route path = "/product/:id" component = {ProductDetails} exact />
 
 
@@ -22,5 +23,6 @@ function App() {
     </Router>
   );
 }
+
 
 export default App;

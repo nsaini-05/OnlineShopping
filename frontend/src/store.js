@@ -11,10 +11,9 @@ const reducers = combineReducers({
 })
 
 
-let initialState = {} // this is the state of the whole application
 
 const middleware = [thunk];
 
-const store = createStore(reducers, initialState, composeWithDevTools(applyMiddleware(...middleware)))
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middleware)))
 
 export default store;

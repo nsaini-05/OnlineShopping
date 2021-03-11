@@ -5,24 +5,37 @@ const sendToken = require('../utils/jwtToken')
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
 
+const cloudinary = require('cloudinary')
+
 //Register User  => /api/v1/Register
 
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-  //console.log(req.body);
+
+  const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: 'avatars',
+    width: 150,
+    crop: "scale"
+})
+
   const {
     name,
     email,
     password
   } = req.body;
+
+
+
   const user = await User.create({
     name,
     email,
     password,
+    
     avatar: {
-      public_id: 'avatars/2256',
-      url: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F114-1149878_setting-user-avatar-in-specific-size-without-breaking.png&imgrefurl=https%3A%2F%2Fwww.pngkey.com%2Fdetail%2Fu2q8u2w7e6t4q8t4_setting-user-avatar-in-specific-size-without-breaking%2F&tbnid=jBttVsXUaIpNEM&vet=12ahUKEwiO76SUjf7uAhUxoOAKHagmBRsQMygEegUIARDdAQ..i&docid=lzc0bcRlt2TRWM&w=820&h=606&q=user%20avatar&safe=strict&ved=2ahUKEwiO76SUjf7uAhUxoOAKHagmBRsQMygEegUIARDdAQ'
+      public_id: result.public_id,
+      url: result.secure_url
     }
+    
   })
   sendToken(user, 200, res)
 });

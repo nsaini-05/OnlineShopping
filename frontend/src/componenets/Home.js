@@ -26,14 +26,11 @@ const Home = ({ match }) => {
     "Electronics",
     "Headphones",
     "Accessories",
-    "food",
     "Cameras",
     "Laptops",
-    "books",
     "Clothes/Shoes",
     "Beauty/Health",
-    "sports",
-    "outdoor",
+    "Outdoor",
     "Food",
   ];
 
@@ -61,7 +58,6 @@ if(keyword)
 {
   count  = filteredProductsCount;
 }
-
 
 
 

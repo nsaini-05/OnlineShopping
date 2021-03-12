@@ -1,13 +1,22 @@
+
+import React, { useEffect } from "react";
 import {BrowserRouter as Router , Route} from 'react-router-dom'
 import './App.css';
-
 import Header from './componenets/layouts/Header'
 import Footer from './componenets/layouts/Footer'
 import Home from './componenets/Home'
 import ProductDetails from './componenets/product/ProductDetails'
 import Login from './componenets/user/Login'
 import Register from './componenets/user/Register'
+import {loadUser} from './actions/userActions' 
+import store from './store'
+
 function App() {
+
+  useEffect(()=>{store.dispatch(loadUser())} , 
+  [])
+
+
   return (
     <Router>
     <div className="App">
@@ -18,6 +27,7 @@ function App() {
     <Route path = "/product/:id" component = {ProductDetails} exact />
     <Route path = "/login" component = {Login} exact />
     <Route path = "/register" component = {Register} exact />
+    <Route path = "/logout" component = {Home} exact />
 
 
 

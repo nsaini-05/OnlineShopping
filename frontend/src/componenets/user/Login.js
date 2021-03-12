@@ -41,7 +41,6 @@ export const Login = ({history}) => {
 
   
     useEffect(() =>{
-       console.log(isAuthenticated);
 
 
        if(isAuthenticated){

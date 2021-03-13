@@ -3,9 +3,15 @@ import MetaData from "../layouts/MetaData";
 
 import { register, clearErrors } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from 'react-alert'
+
 
 
 export const Register = ({ history }) => {
+
+
+  const alert = useAlert();
+
   const [user, setUser] = useState({ name: "", email: "", password: "" });
 
   const { name, email, password } = user;
@@ -153,7 +159,7 @@ export const Register = ({ history }) => {
                     name="avatar"
                     className="custom-file-input"
                     id="customFile"
-                    accept="images/"
+                    accept="images/*"
                     onChange={onChange}
                   />
                   <label className="custom-file-label" htmlFor="customFile">

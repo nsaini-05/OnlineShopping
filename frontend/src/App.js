@@ -10,11 +10,16 @@ import Login from './componenets/user/Login'
 import Register from './componenets/user/Register'
 import {loadUser} from './actions/userActions' 
 import store from './store'
+import ProtectedRoute from './componenets/route/ProtectedRoute'
+import Profile from './componenets/layouts/Profile'
+import UpdateProfile from './componenets/user/UpdateProfile'
+
+
+
 
 function App() {
 
-  useEffect(()=>{store.dispatch(loadUser())} , 
-  [])
+  useEffect(()=>{store.dispatch(loadUser()) }, []  )
 
 
   return (
@@ -25,9 +30,12 @@ function App() {
     <Route path = "/" component = {Home} exact />
     <Route path = "/search/:keyword" component = {Home} exact />
     <Route path = "/product/:id" component = {ProductDetails} exact />
-    <Route path = "/login" component = {Login} exact />
+    <Route path = "/login" component = {Login}  />
     <Route path = "/register" component = {Register} exact />
     <Route path = "/logout" component = {Home} exact />
+    <ProtectedRoute path = "/me" component = {Profile} exact />
+    <ProtectedRoute path = "/me/update" component = {UpdateProfile} exact />
+
 
 
 

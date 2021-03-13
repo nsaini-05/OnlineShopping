@@ -42,10 +42,12 @@ const Home = ({ match }) => {
   const keyword = match.params.keyword;
 
   useEffect(() => {
-    dispatch(getProducts(currentPage, keyword, price, category, rating));
+
     if (error) {
-      return alert.show("Asdfasdfasdf");
-    }
+      return alert.error(error)
+  }
+    dispatch(getProducts(currentPage, keyword, price, category, rating));
+    
   }, [dispatch, alert, error, currentPage, keyword, price, category ,rating]);
  
   function setCurrentpageNo(pageNumber) {

@@ -6,6 +6,7 @@ const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto')
 
 const cloudinary = require('cloudinary')
+const user = require('../models/user')
 
 //Register User  => /api/v1/Register
 
@@ -188,10 +189,31 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 exports.updateProfile = catchAsyncErrors(async function(req, res, next) {
   const newuserData = {
     name: req.body.name,
-    email: req.body.email
+    email: req.body.email,
+    
   }
 
-  //Update avatar : TO do
+
+  if(req.body.avatar !== '')
+  {
+    const user = await User.findById(req.user.id)
+    const image_id = user.avatar.public_id;
+    const res = await cloudinary.v2.uploader.destroy(image_id);
+
+
+
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: 'avatars',
+      width: 150,
+      crop: "scale"
+  })
+
+
+  newuserData.avatar = { public_id : result.public_id , 
+  url : result.secure_url}
+  }
+
+
   const user = await User.findByIdAndUpdate(req.user.id, newuserData, {
     new: true,
     runValidators: true,

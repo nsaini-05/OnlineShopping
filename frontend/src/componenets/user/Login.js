@@ -4,25 +4,44 @@ import Loader from "../layouts/Loader";
 import {Link} from 'react-router-dom'
 import {login , clearErrors} from '../../actions/userActions'
 import { useDispatch, useSelector } from "react-redux";
-
-//import { useAlert } from "react-alert";
-
-
+import { useAlert } from 'react-alert'
 
 
 
 export const Login = ({history}) => {
 
-    //const alert = userAlert();
+
+  const [email , setEmail] = useState("");
+  const [password , setPassword] = useState("");
+
+
+
+    const alert = useAlert();
     const dispatch = useDispatch();
 
-    const [email , setEmail] = useState("");
-    const [password , setPassword] = useState("");
+  
      
 
-    const{isAuthenticated , error , loading , user} = useSelector((state) => state.auth)
+    const{isAuthenticated , error , loading } = useSelector((state) => state.auth)
+
+    useEffect(() =>{
+
+
+      if(isAuthenticated){
+          history.push('/');
+      }
+      
+       if(error)
+       {              
+         alert.error(error);
+         dispatch(clearErrors());
+       }
    
-    function submitHandler(event){
+   } ,[dispatch, alert, isAuthenticated, error, history])
+
+
+   
+    const  submitHandler = (event)=>{
         event.preventDefault();
     dispatch(login(email, password))
     }
@@ -40,20 +59,7 @@ export const Login = ({history}) => {
 
 
   
-    useEffect(() =>{
-
-
-       if(isAuthenticated){
-           history.push('/');
-       }
-       
-        if(error)
-        {
-            alert.error(error);
-            dispatch(clearErrors());
-        }
     
-    } ,[dispatch , error ,isAuthenticated , history ])
 
     return (
        <Fragment>

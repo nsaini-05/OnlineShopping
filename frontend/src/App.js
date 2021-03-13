@@ -16,6 +16,7 @@ import UpdateProfile from './componenets/user/UpdateProfile'
 import UpdatePassword from './componenets/user/UpdatePassword'
 import ForgotPassword from './componenets/user/ForgotPassword'
 import NewPassword from './componenets/user/NewPassword'
+import Cart from './componenets/cart/Cart'
 
 
 
@@ -40,6 +41,9 @@ function App() {
     <ProtectedRoute path = "/me/update" component = {UpdateProfile} exact />
     <ProtectedRoute path = "/me/password/update" component = {UpdatePassword} exact />
     <Route path = "/password/reset/:token" component = {NewPassword} exact />
+
+    <Route path = "/cart" component = {Cart} exact />
+
 
 
 

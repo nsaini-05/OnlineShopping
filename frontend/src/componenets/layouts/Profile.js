@@ -49,9 +49,9 @@ export const Profile = () => {
                     My Orders
                 </Link>}
 
-                <a href="/password/update" class="btn btn-primary btn-block mt-3">
+                <Link to="/me/password/update" class="btn btn-primary btn-block mt-3">
                     Change Password
-                </a>
+                </Link>
             </div>
         </div></Fragment>}
         </Fragment>

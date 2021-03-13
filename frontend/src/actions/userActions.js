@@ -15,7 +15,16 @@ LOGOUT_USER_FAIL,
 UPDATE_PROFILE_FAIL,
 UPDATE_PROFILE_REQUEST,
 UPDATE_PROFILE_SUCCESS,
-UPDATE_PROFILE_RESET
+UPDATE_PROFILE_RESET,
+
+UPDATE_PASSWORD_REQUEST,
+UPDATE_PASSWORD_SUCCESS,
+UPDATE_PASSWORD_FAIL,  
+UPDATE_PASSWORD_RESET  
+
+
+
+
 
 } from "../constants/userConstants";
 
@@ -135,6 +144,36 @@ export const updateProfile = (userData) => async(dispatch) =>{
   catch(error)
   {
     dispatch({type :  UPDATE_PROFILE_FAIL,
+    payload : error.response.data.Message})
+  }
+
+}
+
+
+
+
+
+//UPDATE PASSWORD
+export const updatePassword = (passwords) => async(dispatch) =>{
+  try
+  {
+    console.log("Asdfasdfasdf");
+
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
+      const config = {
+        headers: { 
+          "Content-Type": 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.put('/api/v1/password/update',passwords,config)
+
+
+      dispatch({type : UPDATE_PASSWORD_SUCCESS , payload :  data.success})
+      //dispatch({type : UPDATE_PROFILE_RESET})
+  }
+  catch(error)
+  {
+    dispatch({type :  UPDATE_PASSWORD_FAIL,
     payload : error.response.data.Message})
   }
 

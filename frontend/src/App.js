@@ -13,7 +13,7 @@ import store from './store'
 import ProtectedRoute from './componenets/route/ProtectedRoute'
 import Profile from './componenets/layouts/Profile'
 import UpdateProfile from './componenets/user/UpdateProfile'
-
+import UpdatePassword from './componenets/user/UpdatePassword'
 
 
 
@@ -35,6 +35,8 @@ function App() {
     <Route path = "/logout" component = {Home} exact />
     <ProtectedRoute path = "/me" component = {Profile} exact />
     <ProtectedRoute path = "/me/update" component = {UpdateProfile} exact />
+    <ProtectedRoute path = "/me/password/update" component = {UpdatePassword} exact />
+
 
 
 

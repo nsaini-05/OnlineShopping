@@ -10,7 +10,7 @@ import { useAlert } from 'react-alert'
 export const Register = ({ history }) => {
 
 
-  const alert = useAlert();
+ 
 
   const [user, setUser] = useState({ name: "", email: "", password: "" });
 
@@ -20,7 +20,7 @@ export const Register = ({ history }) => {
   const [avatarPreview, setAvatarPreview] = useState(
     '/images/default_avatar.png'
   );
-
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { isAuthenticated, error, loading } = useSelector(
     (state) => state.auth

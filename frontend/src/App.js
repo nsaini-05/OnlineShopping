@@ -14,6 +14,7 @@ import ProtectedRoute from './componenets/route/ProtectedRoute'
 import Profile from './componenets/layouts/Profile'
 import UpdateProfile from './componenets/user/UpdateProfile'
 import UpdatePassword from './componenets/user/UpdatePassword'
+import ForgotPassword from './componenets/user/ForgotPassword'
 
 
 
@@ -33,6 +34,7 @@ function App() {
     <Route path = "/login" component = {Login}  />
     <Route path = "/register" component = {Register} exact />
     <Route path = "/logout" component = {Home} exact />
+    <Route path = "/password/forgot" component = {ForgotPassword} exact />
     <ProtectedRoute path = "/me" component = {Profile} exact />
     <ProtectedRoute path = "/me/update" component = {UpdateProfile} exact />
     <ProtectedRoute path = "/me/password/update" component = {UpdatePassword} exact />

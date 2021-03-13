@@ -20,7 +20,12 @@ UPDATE_PROFILE_RESET,
 UPDATE_PASSWORD_REQUEST,
 UPDATE_PASSWORD_SUCCESS,
 UPDATE_PASSWORD_FAIL,  
-UPDATE_PASSWORD_RESET  
+UPDATE_PASSWORD_RESET  ,
+
+
+FORGOT_PASSWORD_REQUEST,
+FORGOT_PASSWORD_SUCCESS,
+FORGOT_PASSWORD_FAIL 
 
 
 
@@ -157,7 +162,6 @@ export const updateProfile = (userData) => async(dispatch) =>{
 export const updatePassword = (passwords) => async(dispatch) =>{
   try
   {
-    console.log("Asdfasdfasdf");
 
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
       const config = {
@@ -169,11 +173,38 @@ export const updatePassword = (passwords) => async(dispatch) =>{
 
 
       dispatch({type : UPDATE_PASSWORD_SUCCESS , payload :  data.success})
-      //dispatch({type : UPDATE_PROFILE_RESET})
   }
   catch(error)
   {
     dispatch({type :  UPDATE_PASSWORD_FAIL,
+    payload : error.response.data.Message})
+  }
+
+}
+
+
+
+
+//UPDATE PASSWORD
+export const forgotPassword = (email) => async(dispatch) =>{
+  try
+  {
+
+    dispatch({ type: FORGOT_PASSWORD_REQUEST });
+      const config = {
+        headers: { 
+          "Content-Type": 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.post('/api/v1/user/password/forgot',email,config)
+
+
+      dispatch({type :FORGOT_PASSWORD_SUCCESS , payload :  data.message})
+  }
+  catch(error)
+  { 
+    
+    dispatch({type :  FORGOT_PASSWORD_FAIL,    
     payload : error.response.data.Message})
   }
 

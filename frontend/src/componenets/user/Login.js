@@ -91,7 +91,7 @@ export const Login = ({history}) => {
               />
             </div>
 
-            <Link to="#" className="float-right mb-4">Forgot Password?</Link>
+            <Link to="/password/forgot" className="float-right mb-4">Forgot Password?</Link>
   
             <button
               id="login_button"

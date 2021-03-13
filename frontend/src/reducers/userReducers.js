@@ -18,7 +18,10 @@ UPDATE_PROFILE_RESET,
 UPDATE_PASSWORD_REQUEST,
 UPDATE_PASSWORD_SUCCESS,
 UPDATE_PASSWORD_FAIL,  
-UPDATE_PASSWORD_RESET  
+UPDATE_PASSWORD_RESET ,
+FORGOT_PASSWORD_REQUEST,
+FORGOT_PASSWORD_SUCCESS,
+FORGOT_PASSWORD_FAIL 
 } from "../constants/userConstants";
 
 export const authReducers = function (state = { user: {} }, action) {
@@ -113,7 +116,6 @@ export const userReducer = (state = {} , action) => {
           isUpdated : action.payload
         }
 
-
         case UPDATE_PROFILE_RESET : 
         case UPDATE_PASSWORD_RESET:
         return{
@@ -137,11 +139,57 @@ export const userReducer = (state = {} , action) => {
               error : null
           }
 
+    default :
+      return state 
+  }
+}
 
 
 
+
+//Forgot password Reducers
+
+export const forgotPasswordReducer = (state = {} , action) => {
+  switch(action.type)
+  {
+
+   
+    case FORGOT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading : true,
+        error: null
+      }
+
+
+      case FORGOT_PASSWORD_SUCCESS:
+        return {
+          ...state,
+          loading : false,
+          message  :  action.payload
+        }
+
+       
+        
+
+      case FORGOT_PASSWORD_FAIL:
+        return {
+          ...state,          
+          loading : false,
+
+          error : action.payload
+        }  
+
+        case CLEAR_ERRORS:
+          return {
+              ...state,
+              error : null
+          }
 
     default :
       return state 
   }
 }
+
+
+

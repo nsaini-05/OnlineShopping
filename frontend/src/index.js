@@ -10,9 +10,11 @@ import store from './store'
 
 
 const options = {
-  timeout : 5000,
-  postion : positions.BOTTOM_CENTER,
-  transition : transitions.SCALE
+  position: positions.BOTTOM_CENTER,
+  timeout: 5000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE
 }
 
 

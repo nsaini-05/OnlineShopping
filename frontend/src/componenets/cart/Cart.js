@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import MetaData from "../layouts/MetaData";
 import {useDispatch , useSelector} from 'react-redux'
 import { useAlert } from 'react-alert'
-
 import {addItemToCart ,removeItemFromCart} from '../../actions/cartActions'
 
 
@@ -36,8 +35,30 @@ export const Cart = () => {
 
 
 
-    return (
-      
+    
+
+    function getTotalQuantity(items)
+    {
+        let totalUnits = 0;
+        items.forEach(item => {
+            totalUnits += item.quantity
+        });
+        return totalUnits;
+    }
+
+
+    function getTotalPrice(items)
+    {
+        let totalPrice = 0 ; 
+        items.forEach(item => {
+            totalPrice = item.quantity * item.price;
+        })
+         return totalPrice;
+    }
+
+
+
+    return (  
 
 
 
@@ -48,7 +69,7 @@ export const Cart = () => {
             (
                 <Fragment>
 
-                <h2 className="mt-5">Your Cart: <b>{cartItems.length}</b></h2>
+                <h2 className="mt-5">Your Cart: <b>{cartItems.length} items</b></h2>
         
         <div className="row d-flex justify-content-between">
             <div className="col-12 col-lg-8">
@@ -69,7 +90,7 @@ export const Cart = () => {
 
 
                         <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                            <p id="card_item_price">{item.price}</p>
+                            <p id="card_item_price">${item.price}</p>
                         </div>
 
                         <div className="col-4 col-lg-3 mt-4 mt-lg-0">
@@ -91,13 +112,6 @@ export const Cart = () => {
                 
                     </Fragment>
                 ))}
-
-
-
-
-
-
-              
                 
             </div>
 
@@ -105,8 +119,8 @@ export const Cart = () => {
                 <div id="order_summary">
                     <h4>Order Summary</h4>
                     <hr />
-                    <p>Subtotal:  <span className="order-summary-values">3 (Units)</span></p>
-                    <p>Est. total: <span className="order-summary-values">$765.56</span></p>
+                    <p>Subtotal:  <span className="order-summary-values">{getTotalQuantity(cartItems)} (Units)</span></p>
+                    <p>Est. total: <span className="order-summary-values">${getTotalPrice(cartItems)}</span></p>
     
                     <hr />
                     <button id="checkout_btn" className="btn btn-primary btn-block">Check out</button>
@@ -117,13 +131,7 @@ export const Cart = () => {
 
 
                 </Fragment>
-            )
-            
-            
-            
-            
-            
-            
+            )           
             
              }
         </Fragment>

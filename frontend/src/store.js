@@ -5,11 +5,14 @@ import { productsReducer , productDetailReducer } from './reducers/productReduce
 import {authReducers , userReducer, forgotPasswordReducer} from './reducers/userReducers'
 import {cartReducer} from './reducers/cartReducers'
     import { format } from 'path';
+import { JsonWebTokenError } from 'jsonwebtoken';
 
 
     let initialState = {
         cart : {
-            cartItems : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+            cartItems : localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
+            shippingInfo : localStorage.getItem('shippingInfo') ? JSON.parse(localStorage.getItem('shippingInfo')) : {}
+        
         }
     }
 

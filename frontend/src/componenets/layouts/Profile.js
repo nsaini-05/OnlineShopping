@@ -6,13 +6,7 @@ import MetaData from "../layouts/MetaData";
 
 
 
-
-
-
-
-
 export const Profile = () => {
-
 
     const {user , loading} = useSelector((state) =>state.auth)
 

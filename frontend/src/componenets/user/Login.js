@@ -8,7 +8,10 @@ import { useAlert } from 'react-alert'
 
 
 
-export const Login = ({history}) => {
+export const Login = ({history ,location}) => {
+
+  
+const redirect =  location.search ? location.search.split('=')[1] : '/'
 
 
   const [email , setEmail] = useState("");
@@ -24,11 +27,12 @@ export const Login = ({history}) => {
 
     const{isAuthenticated , error , loading } = useSelector((state) => state.auth)
 
+
     useEffect(() =>{
 
 
       if(isAuthenticated){
-          history.push('/');
+          history.push(redirect);
       }
       
        if(error)

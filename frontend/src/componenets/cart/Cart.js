@@ -6,7 +6,7 @@ import { useAlert } from 'react-alert'
 import {addItemToCart ,removeItemFromCart} from '../../actions/cartActions'
 
 
-export const Cart = () => {
+export const Cart = ({history}) => {
 
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state)=>state.cart);
@@ -45,17 +45,21 @@ export const Cart = () => {
         });
         return totalUnits;
     }
-
+ 
 
     function getTotalPrice(items)
     {
         let totalPrice = 0 ; 
         items.forEach(item => {
-            totalPrice = item.quantity * item.price;
+            totalPrice += item.quantity * item.price;
         })
          return totalPrice;
     }
 
+
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping')
+    }
 
 
     return (  
@@ -123,7 +127,7 @@ export const Cart = () => {
                     <p>Est. total: <span className="order-summary-values">${getTotalPrice(cartItems)}</span></p>
     
                     <hr />
-                    <button id="checkout_btn" className="btn btn-primary btn-block">Check out</button>
+                    <button id="checkout_btn" onClick = {checkoutHandler }  className="btn btn-primary btn-block">Check out</button>
                 </div>
             </div>
         </div>

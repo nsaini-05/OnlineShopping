@@ -123,8 +123,8 @@ export const Cart = ({history}) => {
                 <div id="order_summary">
                     <h4>Order Summary</h4>
                     <hr />
-                    <p>Subtotal:  <span className="order-summary-values">{getTotalQuantity(cartItems)} (Units)</span></p>
-                    <p>Est. total: <span className="order-summary-values">${getTotalPrice(cartItems)}</span></p>
+                    <p>Subtotal:  <span className="order-summary-values">{getTotalQuantity(cartItems).toFixed(2)} (Units)</span></p>
+                    <p>Est. total: <span className="order-summary-values">${getTotalPrice(cartItems).toFixed(2)}</span></p>
     
                     <hr />
                     <button id="checkout_btn" onClick = {checkoutHandler }  className="btn btn-primary btn-block">Check out</button>

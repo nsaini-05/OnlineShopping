@@ -7,7 +7,7 @@ import CheckoutSteps from './CheckoutSteps'
 
 function getCost(item)
 {
-    return item.quantity * item.price
+    return (item.quantity * item.price).toFixed(2)
 }
 
 
@@ -17,7 +17,7 @@ function getTotalPrice(items)
     items.forEach(item => {
         totalPrice += item.quantity * item.price;
     })
-     return totalPrice;
+     return totalPrice.toFixed(2);
 }
 
 
@@ -32,15 +32,15 @@ export const ConfirmOrder = ({history}) => {
     const {user} = useSelector((state) => state.auth)
     const { cartItems ,shippingInfo } = useSelector((state)=>state.cart);
 
-    const itemsPrice = getTotalPrice(cartItems);
-    const shippingPrice = itemsPrice > 200 ? 0 : 25
+    const itemsPrice = Number(getTotalPrice(cartItems));
+    const shippingPrice = Number(itemsPrice > 200 ? 0 : 25)
     const taxPrice = Number((0.05 * itemsPrice).toFixed(2));
-    const totalPrice  = Number(itemsPrice  + shippingPrice + taxPrice).toFixed(2)
+    const totalPrice  = Number((itemsPrice  + shippingPrice + taxPrice).toFixed(2))
 
 
     const  proceedToPayment = ()=>{
         const data = {
-            itemsPrice  : itemsPrice.toFixed(2),
+            itemsPrice  : itemsPrice,
             shippingPrice,
             taxPrice,
             totalPrice
@@ -48,7 +48,7 @@ export const ConfirmOrder = ({history}) => {
         }   
 
         sessionStorage.setItem('orderInfo' , JSON.stringify(data));
-        history.push('/')
+        history.push('/payment')
 
        }
        

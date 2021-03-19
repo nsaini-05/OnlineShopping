@@ -25,6 +25,9 @@ import { ConfirmOrder } from "./componenets/cart/ConfirmOrder";
 import Payment from './componenets/cart/Payment'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import {OrderSuccess} from './componenets/cart/OrderSuccess'
+import {ListOrders} from './componenets/order/ListOrders'
+import OrderDetails from "./componenets/order/OrderDetails";
 
 
 
@@ -39,7 +42,6 @@ function App() {
     store.dispatch(loadUser())
     async function getStripeApiKey(){
       const {data} = await axios.get('/api/v1/stripeapi');    
-      console.log(data)
       setStripeApiKey(data.stripeApiKey)
     } 
     getStripeApiKey();    
@@ -70,6 +72,13 @@ function App() {
     <ProtectedRoute path = "/payment" component = {Payment} exact />
     </Elements>     
     }
+
+
+    <ProtectedRoute path = '/success' component = {OrderSuccess}/>
+    <ProtectedRoute path = '/orders/me' component = {ListOrders} />
+    <ProtectedRoute path = '/order/:id' component = {OrderDetails} exact />
+
+
 
     </div>
     <Footer />

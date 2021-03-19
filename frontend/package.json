@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.12.3",
+    "@date-io/moment": "file:fortawesome\\fontawesome-free@material-ui\\corebootstrap-css-onlychart.jsclassnamesfocus-trap-reactmaterial-ui-pickersmomentperfect-scrollbarpopper.jsprop-typesrafreactreact-chartjs-2react-domreact-image-lightboxreact-numeric-inputreact-popperreact-router-domreact-scrollreact-toastifyreact-transition-groupsass-loader",
     "@stripe/react-stripe-js": "^1.4.0",
     "@stripe/stripe-js": "^1.13.1",
     "@testing-library/jest-dom": "^5.11.9",
@@ -11,12 +13,12 @@
     "axios": "^0.21.1",
     "countries-list": "^2.6.1",
     "country-list": "^2.2.0",
+    "mdb": "^0.1.0",
+    "mdbreact": "^4.27.0",
     "rc-slider": "^9.7.1",
-    "react": "^17.0.1",
     "react-alert": "^7.0.2",
     "react-alert-template-basic": "^1.0.0",
     "react-bootstrap": "^1.5.1",
-    "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-js-pagination": "^3.0.3",
     "react-redux": "^7.2.2",
@@ -51,5 +53,10 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4000",
+  "devDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "reactstrap": "^8.9.0"
+  }
 }

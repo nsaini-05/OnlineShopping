@@ -4,8 +4,8 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import { productsReducer , productDetailReducer } from './reducers/productReducers'
 import {authReducers , userReducer, forgotPasswordReducer} from './reducers/userReducers'
 import {cartReducer} from './reducers/cartReducers'
-    import { format } from 'path';
-import { JsonWebTokenError } from 'jsonwebtoken';
+import {newOrderReducer , myOrdersReducers , orderDetailsReducer} from './reducers/orderReducers'
+
 
 
     let initialState = {
@@ -22,9 +22,10 @@ const reducers = combineReducers({
     auth : authReducers, 
     user : userReducer,
     forgotUserPassword : forgotPasswordReducer,
-    cart : cartReducer
-
-
+    cart : cartReducer,
+    newOrder : newOrderReducer,
+    myOrders   :  myOrdersReducers,
+    orderDetails : orderDetailsReducer
 })
 
 

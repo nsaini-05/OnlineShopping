@@ -37,7 +37,7 @@ const order = await Order.create({
 exports.getSingleOrder = catchAsyncErrors( async (req,res,next)=>{
 const order = await Order.findById(req.params.id);
 //const order = await Order.findById(req.params.id).populate('user','name email');
-console.log(order._id)
+//console.log(order._id)
 if(!order)
 {
   return next(new ErrorHandler("No order found with this ID" , 404))
@@ -51,7 +51,8 @@ res.status(200).json({
 
 //Get the LoggedIn user order => /api/v1/order/:id
 exports.myOrders = catchAsyncErrors( async (req,res,next)=>{
-const orders =  Order.find({user : req.user.id})
+const orders =  await Order.find({user : req.user.id})
+
 res.status(200).json({
   success : true,
   orders

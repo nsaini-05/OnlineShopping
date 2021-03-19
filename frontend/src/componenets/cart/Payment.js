@@ -6,7 +6,7 @@ import { saveShippingInfo } from "../../actions/cartActions";
 import { useAlert } from "react-alert";
 import CheckoutSteps from "./CheckoutSteps";
 import { Elements } from '@stripe/react-stripe-js'
-
+import {createOrder , clearErrors} from '../../actions/orderAction'
 
 
 
@@ -33,6 +33,7 @@ export const Payment = ({ history }) => {
 
   const {user} = useSelector(state => state.auth);
   const {cartItems , shippingInfo} = useSelector(state => state.cart);
+  const {error} = useSelector(state => state.newOrder)
 
 
   const options = {
@@ -48,12 +49,35 @@ export const Payment = ({ history }) => {
 
   useEffect(() => {
       
+    if(error)
+    {
+      alert.error(error)
+      dispatch(clearErrors())
+    }
 
   
       
-  }, [])
+  }, [dispatch , alert , error])
+
+
+const order = {
+  orderItems : cartItems,
+  shippingInfo
+  
+
+}
+
 
 const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'))
+
+if(orderInfo){
+  order.itemsPrice = orderInfo.itemsPrice;
+  order.shippingPrice = orderInfo.shippingPrice;
+  order.taxPrice = orderInfo.taxPrice;
+  order.totalPrice = orderInfo.totalPrice
+}
+
+
 const paymentData = {
   amount : Math.round(orderInfo.totalPrice * 100)
 }
@@ -76,7 +100,6 @@ async function submitHandler(event){
       }
 
       res = await axios.post('/api/v1/payment/process' , paymentData , config)
-      console.log(res)
 
       const clientSecret = res.data.client_secret;
 
@@ -114,6 +137,12 @@ async function submitHandler(event){
           //The Payment is Processed or not
           if(result.paymentIntent.status === 'succeeded')
           {
+
+              order.paymentInfo = {id : result.paymentIntent.id,
+              status :  result.paymentIntent.status}
+
+
+              dispatch(createOrder(order));
               history.push('/success')
           }
 

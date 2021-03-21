@@ -11,6 +11,11 @@ import ProductDetails from './componenets/product/ProductDetails'
 import Login from './componenets/user/Login'
 import Register from './componenets/user/Register'
 import {loadUser} from './actions/userActions' 
+import {useSelector} from 'react-redux'
+
+
+
+
 import store from './store'
 import ProtectedRoute from './componenets/route/ProtectedRoute'
 import Profile from './componenets/layouts/Profile'
@@ -35,6 +40,8 @@ import OrderDetails from "./componenets/order/OrderDetails";
 //Admin Imports 
 import {Dashboard} from './componenets/admin/Dashboard'
 import ProductsList from "./componenets/admin/ProductsList";
+import NewProduct from './componenets/admin/NewProduct';
+import { userReducer } from "./reducers/userReducers";
 
 
 
@@ -54,6 +61,8 @@ function App() {
     getStripeApiKey();    
    }, []  )
 
+
+   const {user,loading} = useSelector((state) => state.auth)
 
   return (
     <Router>
@@ -85,22 +94,16 @@ function App() {
     <ProtectedRoute path = '/orders/me' component = {ListOrders} />
     <ProtectedRoute path = '/order/:id' component = {OrderDetails} exact />
 
-
-
-
-
-
-
-
-
-
     </div>
 
     <ProtectedRoute path = '/dashboard' isAdmin = {true} component = {Dashboard} exact />
     <ProtectedRoute path = '/admin/products' isAdmin = {true} component = {ProductsList} exact />
+    <ProtectedRoute path = '/admin/product/new' isAdmin = {true} component = {NewProduct} exact />
+
+{!loading && user && user.role !== 'admin' && (<Footer/>)}
 
 
-    <Footer />
+  
     </div>
     </Router>
   );

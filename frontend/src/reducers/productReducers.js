@@ -12,7 +12,12 @@ NEW_REVIEW_FAIL  ,
 NEW_REVIEW_RESET ,
 ADMIN_PRODUCTS_FAIL,
 ADMIN_PRODUCTS_REQUEST,
-ADMIN_PRODUCTS_SUCCESS 
+ADMIN_PRODUCTS_SUCCESS,
+NEW_PRODUCT_REQUEST,
+NEW_PRODUCT_FAIL,
+NEW_PRODUCT_SUCCESS,
+NEW_PRODUCT_RESET
+
 } from "../constants/productConstants";
 
 
@@ -137,6 +142,49 @@ export const newReviewReducer = function (state = {}, action) {
   }
 };
 
+
+
+
+
+export const newProductReducer = function (state = {product :{}}, action) {
+
+
+  switch (action.type) {
+    case NEW_PRODUCT_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+
+    case NEW_PRODUCT_SUCCESS:
+      return {
+        loading: false,
+        success : action.payload.success,
+        product  : action.payload.product
+      };
+
+    case NEW_PRODUCT_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+
+      case NEW_PRODUCT_RESET:
+      return {
+        ...state,
+        success : false
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
 
 
 

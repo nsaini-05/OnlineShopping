@@ -26,8 +26,15 @@ import Payment from './componenets/cart/Payment'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import {OrderSuccess} from './componenets/cart/OrderSuccess'
+
+//Order Imports
 import {ListOrders} from './componenets/order/ListOrders'
 import OrderDetails from "./componenets/order/OrderDetails";
+
+
+//Admin Imports 
+import {Dashboard} from './componenets/admin/Dashboard'
+import ProductsList from "./componenets/admin/ProductsList";
 
 
 
@@ -80,7 +87,19 @@ function App() {
 
 
 
+
+
+
+
+
+
+
     </div>
+
+    <ProtectedRoute path = '/dashboard' isAdmin = {true} component = {Dashboard} exact />
+    <ProtectedRoute path = '/admin/products' isAdmin = {true} component = {ProductsList} exact />
+
+
     <Footer />
     </div>
     </Router>

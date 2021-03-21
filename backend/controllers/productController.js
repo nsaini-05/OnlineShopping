@@ -30,6 +30,26 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 })
 
 
+
+//Getting Admin Product only ap/v1/admin/products
+
+exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+
+  const products = await Product.find();
+
+      res.status(200).json({
+            success: true,
+            products
+                    })
+  
+})
+
+
+
+
+
+
+
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
   req.body.user = req.user.id;
   const product = await Product.create(req.body);

@@ -64,14 +64,14 @@ res.status(200).json({
 //Getting all the orders => /api/v1/admin/orders
 exports.allOrders = catchAsyncErrors(async (req,res,next)=>{
  const orders = await Order.find();
-let totalamount = 0;
+let totalAmount = 0;
 orders.forEach(order => {
- totalamount += order.totalPrice
+ totalAmount += order.totalPrice
 });
 
  res.status(200).json({
   success : true,
-  totalamount,
+  totalAmount,
   orders
  })
 })

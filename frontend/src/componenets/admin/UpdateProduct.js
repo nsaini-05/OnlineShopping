@@ -30,7 +30,7 @@ const UpdateProduct = ({match , history}) => {
 
 
 
-    
+
     useEffect(()=>{   
         
         if(product && product._id !==  productId)
@@ -59,9 +59,8 @@ const UpdateProduct = ({match , history}) => {
 
         if(updateError)
         {
-            history.push('/admin/products');
-            alert.success('Product Updated Successfully');
-            dispatch({type : UPDATE_PRODUCT_RESET})
+          alert.error(updateError);
+          dispatch(clearErrors());
         }
 
         if(isUpdated){
@@ -74,6 +73,7 @@ const UpdateProduct = ({match , history}) => {
           }
 
     },[dispatch , alert, isUpdated , history , error , updateError , product , productId])
+    
 
 
 
@@ -119,8 +119,6 @@ const UpdateProduct = ({match , history}) => {
 const onChange = e => {
 
     const files = Array.from(e.target.files)
-
-
     setImagesPreview([]);
     setImages([]);
     setOldImages([]);
@@ -133,7 +131,7 @@ const onChange = e => {
                 setImagesPreview(oldArray => [...oldArray , reader.result])
                 setImages(oldArray => [...oldArray , reader.result])
 
-            }
+            } 
         }
 
         reader.readAsDataURL(file)

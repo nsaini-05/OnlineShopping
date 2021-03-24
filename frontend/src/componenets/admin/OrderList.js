@@ -4,34 +4,33 @@ import MetaData from "../layouts/MetaData";
 import { MDBDataTable } from "mdbreact";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
+import { allOrders , clearErrors } from "../../actions/orderAction";
 import Loader from "../layouts/Loader"; 
-import {getAdminProducts , clearErrors, deleteProduct} from '../../actions/productAction'
 import Sidebar from './Sidebar'
-import {DELETE_PRODUCT_RESET} from '../../constants/productConstants'
 
 
 
-const ProductsList = ({history}) => {
+
+
+const OrderList = ({history}) => {
 
     const alert = useAlert();
     const dispatch = useDispatch();
-    const { loading, error, products } = useSelector((state) => state.products);
-    const {error : deleteError , isDeleted} = useSelector((state)=>state.product)
+    const { loading, error, orders  } = useSelector(state => state.allOrders);
+
+
+    
   
     useEffect(() => {
-      dispatch(getAdminProducts());
+      dispatch(allOrders());
   
       if (error) {
         alert.error(error);
         dispatch(clearErrors());
       }
 
-      if(deleteError)
-      {
-        alert.error(deleteError);
-        dispatch(clearErrors());
-      }
-
+    
+/*
       if(isDeleted)
       {
         alert.success("Product Deleted Successfully")
@@ -39,48 +38,30 @@ const ProductsList = ({history}) => {
         dispatch({type: DELETE_PRODUCT_RESET})
       }
 
-
-
-
-
-
-
-    }, [dispatch, alert, error, deleteError , isDeleted , history]);
-
-
-    const deleteProductHandler = (id)=>{
-      dispatch (deleteProduct(id))
-
-    }
-
-
-
-
-
-
+*/    }, [dispatch, alert, error,history]);
 
   
-    const setProducts = () => {
+    const setOrders = () => {
       const data = {
         columns: [
           {
-            label: "ID",
+            label: 'Order ID',
             field: "id",
             sort: "asc",
           },
           {
-            label: "Name",
-            field: "name",
+            label: "No. of Items",
+            field: "numofItems",
             sort: "asc",
           },
           {
-            label: "Price",
-            field: "price",
+            label: "Amount",
+            field: "amount",
             sort: "asc",
           },
           {
-            label: "Stock",
-            field: "stock",
+            label: "Status",
+            field: "status",
             sort: "asc",
           },
           {
@@ -92,39 +73,42 @@ const ProductsList = ({history}) => {
   
         rows: [],
       };
-  
-      products.forEach((product) => {
+ 
+      orders.forEach((order) => {
         data.rows.push({
-          id: product._id,
-          name: product.name,
-          price: `$${product.price}`,
-          stock : product.stock,
-          actions: <Fragment>
-            <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2">
-              <i className="fa fa-pencil"></i>
-            </Link>
-            <button className = "btn btn-danger py-1 px-2 ml-2" onClick = {()=>deleteProductHandler(product._id)} >
+          id: order._id,
+          numofItems: order.orderItems.length,
+          amount: `$${order.totalPrice}`,
+
+          status:
+          order.orderStatus &&
+          String(order.orderStatus).includes("Delievered") ? (
+            <p style={{ color: "green" }}>{order.OrderStatus}</p>
+          ) : (
+            <p style={{ color: "red" }}>{order.orderStatus}</p>
+          ),
+
+
+        actions: (<Fragment>
+          <Link to={`/order/${order._id}`} className="btn btn-primary">
+            <i className="fa fa-eye"></i>
+          </Link>
+          <button className = "btn btn-danger py-1 px-2 ml-2">
             <i className="fa fa-trash"></i>
-
-            </button>
-            </Fragment>
-
-
-          
+            </button>     
+          </Fragment>
+        )          
         });
       });
   
       return data;
     };
-
-
-
- 
-  
-
+    
     return (
+
         <Fragment>
-        <MetaData title = {'All Products'}/>
+        
+        <MetaData title = {'All Orders'}/>
 
         <div className = "row">
             <div className = "col-12 col-md-2">
@@ -134,9 +118,9 @@ const ProductsList = ({history}) => {
             </div>
             <div className = "col-12 col-md-10">
             <Fragment>
-                <h1 className = "my-5">All Products</h1>
+                <h1 className = "my-5">All Orders</h1>
                 {loading ? <Loader></Loader> : <MDBDataTable
-          data={setProducts()}
+          data={setOrders()}
           className="px-3"
           bordered
           striped
@@ -147,9 +131,10 @@ const ProductsList = ({history}) => {
             </div>
 
         </div>
+        
 
         </Fragment>
     )
 }
 
-export default ProductsList
+export default OrderList

@@ -55,25 +55,25 @@ export const ListOrders = () => {
       rows: [],
     };
 
-    orders.forEach((order) => {
-      data.rows.push({
-        id: order._id,
-        numOfItems: order.orderItems.length,
-        amount: `$${order.totalPrice}`,
-        status:
-          order.orderStatus &&
-          String(order.orderStatus).includes("Delievered") ? (
-            <p style={{ color: "green" }}>{order.OrderStatus}</p>
-          ) : (
-            <p style={{ color: "red" }}>{order.orderStatus}</p>
+      orders.forEach((order) => {
+        data.rows.push({
+          id: order._id,
+          numOfItems: order.orderItems.length,
+          amount: `$${order.totalPrice}`,
+          status:
+            order.orderStatus &&
+            String(order.orderStatus).includes("Delievered") ? (
+              <p style={{ color: "green" }}>{order.OrderStatus}</p>
+            ) : (
+              <p style={{ color: "red" }}>{order.orderStatus}</p>
+            ),
+          actions: (
+            <Link to={`/order/${order._id}`} className="btn btn-primary">
+              <i className="fa fa-eye"></i>
+            </Link>
           ),
-        actions: (
-          <Link to={`/order/${order._id}`} className="btn btn-primary">
-            <i className="fa fa-eye"></i>
-          </Link>
-        ),
+        });
       });
-    });
 
     return data;
   };

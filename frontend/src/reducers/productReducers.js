@@ -260,17 +260,6 @@ export const productReducer = function(state = {} , action)
         };
       default:
         return state;
-
-    
-
-
-
-
-
-
-
-
-
   }
 }
 

@@ -82,8 +82,8 @@ const OrderList = ({history}) => {
 
           status:
           order.orderStatus &&
-          String(order.orderStatus).includes("Delievered") ? (
-            <p style={{ color: "green" }}>{order.OrderStatus}</p>
+          String(order.orderStatus).includes("Delivered") ? (
+            <p style={{ color: "green" }}>{order.orderStatus}</p>
           ) : (
             <p style={{ color: "red" }}>{order.orderStatus}</p>
           ),

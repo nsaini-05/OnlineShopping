@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MetaData from "../layouts/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { updateOrder , clearErrors } from "../../actions/orderAction";
+import { updateOrder , delte , clearErrors } from "../../actions/orderAction";
 import Loader from "../layouts/Loader"; 
 import Sidebar from './Sidebar'
 import {UPDATE_ORDER_RESET} from "../../constants/orderConstants"

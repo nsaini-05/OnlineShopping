@@ -4,9 +4,10 @@ import MetaData from "../layouts/MetaData";
 import { MDBDataTable } from "mdbreact";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { allOrders , clearErrors } from "../../actions/orderAction";
+import { allOrders ,deleteOrder , clearErrors } from "../../actions/orderAction";
 import Loader from "../layouts/Loader"; 
 import Sidebar from './Sidebar'
+import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
 
 
@@ -17,6 +18,8 @@ const OrderList = ({history}) => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const { loading, error, orders  } = useSelector(state => state.allOrders);
+    const { isDeleted } = useSelector(state => state.order);
+
 
 
     
@@ -30,15 +33,22 @@ const OrderList = ({history}) => {
       }
 
     
-/*
+
       if(isDeleted)
       {
-        alert.success("Product Deleted Successfully")
-        history.push('/admin/products');
-        dispatch({type: DELETE_PRODUCT_RESET})
+        alert.success("Order Deleted Successfully")
+        history.push('/admin/orders');
+        dispatch({type: DELETE_ORDER_RESET})
       }
 
-*/    }, [dispatch, alert, error,history]);
+    }, [dispatch, alert, error,history , isDeleted]);
+
+
+    const deleteOrderHandler = (id) =>{
+
+      dispatch(deleteOrder(id))
+
+    }
 
   
     const setOrders = () => {
@@ -90,11 +100,11 @@ const OrderList = ({history}) => {
 
 
         actions: (<Fragment>
-          <Link to={`/order/${order._id}`} className="btn btn-primary">
+          <Link to={`/admin/order/${order._id}`} className="btn btn-primary">
             <i className="fa fa-eye"></i>
           </Link>
-          <button className = "btn btn-danger py-1 px-2 ml-2">
-            <i className="fa fa-trash"></i>
+          <button className = "btn btn-danger py-1 px-2 ml-2"  onClick = {() =>deleteOrderHandler(order._id)}>
+            <i className="fa fa-trash" ></i>
             </button>     
           </Fragment>
         )          

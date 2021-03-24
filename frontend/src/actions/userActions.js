@@ -29,7 +29,10 @@ FORGOT_PASSWORD_FAIL ,
 
 NEW_PASSWORD_REQUEST,
 NEW_PASSWORD_SUCCESS,
-NEW_PASSWORD_FAIL
+NEW_PASSWORD_FAIL,
+ALL_USER_REQUEST,
+ALL_USER_SUCCESS,
+ALL_USER_FAIL
 
 
 
@@ -245,6 +248,29 @@ export const resetPassword = (token, passwords) => async(dispatch) =>{
   }
 
 }
+
+
+
+//Admin Routes
+
+export const getAllUsers = () => async(dispatch) =>{
+  try{
+    dispatch({type : ALL_USER_REQUEST});
+    const {data}  = await axios.get('/api/v1/admin/users');
+
+
+    console.log(data)
+    dispatch({type :  ALL_USER_SUCCESS , payload : data.users});
+    
+  }
+  catch(error)
+  {
+    dispatch({type : ALL_USER_FAIL , 
+    payload : error.response.data.Message})
+  }
+}
+
+
 
 
 export const clearErrors = () => async (dispatch) => {

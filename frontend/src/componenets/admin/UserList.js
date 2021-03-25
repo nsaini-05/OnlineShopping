@@ -4,9 +4,10 @@ import MetaData from "../layouts/MetaData";
 import { MDBDataTable } from "mdbreact";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { getAllUsers ,clearErrors} from "../../actions/userActions";
+import { getAllUsers ,clearErrors , deleteUser} from "../../actions/userActions";
 import Loader from "../layouts/Loader"; 
 import Sidebar from './Sidebar'
+import {DELETE_USER_RESET} from '../../constants/userConstants'
 
 
 const UserList = ({history}) => {
@@ -14,6 +15,8 @@ const UserList = ({history}) => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const { loading, error, users  } = useSelector(state => state.allUsers);
+    const { isDeleted}  = useSelector(state => state.user);
+
 
     useEffect(()=>{
 
@@ -24,11 +27,23 @@ const UserList = ({history}) => {
             dispatch(clearErrors());
           }     
           
+        if(isDeleted)
+        {
+          alert.success("User Deleted Successfully");
+        history.push('/admin/users');
+        dispatch({ type: DELETE_USER_RESET });
+
+          }
           
 
 
 
-    },[dispatch, alert, error]);
+    },[dispatch, alert, error ,isDeleted ,history]);
+
+
+    const deleteUserHandler = (id) =>{
+      dispatch(deleteUser(id));
+    }
 
 
     
@@ -76,10 +91,10 @@ const UserList = ({history}) => {
   
   
           actions: (<Fragment>
-            <Link to={``} className="btn btn-primary">
+            <Link to={`/admin/user/${user._id}`} className="btn btn-primary">
               <i className="fa fa-eye"></i>
             </Link>
-            <button className = "btn btn-danger py-1 px-2 ml-2"  >
+            <button className = "btn btn-danger py-1 px-2 ml-2" onClick = {()=>deleteUserHandler(user._id)} >
               <i className="fa fa-trash" ></i>
               </button>     
             </Fragment>

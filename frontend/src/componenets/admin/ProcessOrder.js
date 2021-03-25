@@ -90,6 +90,17 @@ const ProcessOrder = ({match , history}) => {
 
     return (<Fragment>
     <MetaData title = "Update Order" />
+    <div className = "row">
+            <div className = "col-12 col-md-2">
+                <Sidebar />
+                </div>
+
+
+
+
+
+
+
         <div class="row d-flex justify-content-around">
         <div class="col-12 col-lg-7 order-details">
 
@@ -139,7 +150,6 @@ const ProcessOrder = ({match , history}) => {
                             </div>
                         </div>
             
-          
             </Fragment>
 
             )) }
@@ -176,6 +186,7 @@ const ProcessOrder = ({match , history}) => {
                                     </button>
                     </div>
         
+    </div>
     </div>
 </Fragment>
     )

@@ -46,6 +46,7 @@ import UpdateProduct from './componenets/admin/UpdateProduct'
 import OrderList from './componenets/admin/OrderList'
 import ProcessOrder from './componenets/admin/ProcessOrder'
 import UserList from './componenets/admin/UserList'
+import UpdateUser from './componenets/admin/UpdateUser'
 
 
 
@@ -108,6 +109,8 @@ function App() {
     <ProtectedRoute path = '/admin/orders' isAdmin = {true} component = {OrderList} exact />
     <ProtectedRoute path = '/admin/order/:id' isAdmin = {true} component = {ProcessOrder} exact />
     <ProtectedRoute path = '/admin/users' isAdmin = {true} component = {UserList} exact />
+    <ProtectedRoute path = '/admin/user/:id' isAdmin = {true} component = {UpdateUser} exact />
+
 {!loading && user && user.role !== 'admin' && (<Footer/>)}
 
 

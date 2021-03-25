@@ -33,7 +33,7 @@ router.route('/me/update').put(isAuthenticatedUser, updateProfile);
 router.route('/user/logout').get(isAuthenticatedUser, logout)
 
 router.route('/admin/users').get(isAuthenticatedUser, authorizeRoles('admin'), allUsers)
-router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles('admin'), allUsers)
+router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles('admin'), getUserDetails)
 router.route('/admin/user/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateUser)
 router.route('/admin/user/:id').delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser)
 

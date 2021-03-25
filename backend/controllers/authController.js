@@ -262,6 +262,8 @@ exports.getUserDetails = catchAsyncErrors(async (req,res,next) => {
   {
     return next(new ErrorHandler('User does not exist with id :  ' + req.params.id))
   }
+
+
 res.status(200).json({
   success : "true",
   user
@@ -291,12 +293,17 @@ exports.updateUser = catchAsyncErrors(async function(req, res, next) {
 //Delete user => api/v1/admin/user/:id
 exports.deleteUser= catchAsyncErrors(async (req,res,next) => {
   const user = await User.findById(req.params.id);
+
+  const image_id = user.avatar.public_id;
+   await cloudinary.v2.uploader.destroy(image_id);
+
+
+
   if(!user)
   {
     return next(new ErrorHandler('User does not exist with id :  ' + req.params.id))
   }
 
-// remove avatar from Cloud : todo
 
   await user.remove()
 
